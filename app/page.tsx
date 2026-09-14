@@ -22,7 +22,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Overview", icon: LayoutDashboard, active: true },
@@ -39,6 +39,28 @@ const alerts = [
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const progressTimer = window.setInterval(() => {
+      setLoadingProgress((currentProgress) => {
+        if (currentProgress >= 100) {
+          window.clearInterval(progressTimer);
+          window.setTimeout(() => setIsLoading(false), 260);
+          return 100;
+        }
+
+        return currentProgress + 1;
+      });
+    }, 18);
+
+    return () => window.clearInterval(progressTimer);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingScreen progress={loadingProgress} />;
+  }
 
   return (
     <div className="app-shell">
@@ -130,6 +152,26 @@ export default function Home() {
         </div>
       </main>
     </div>
+  );
+}
+
+function LoadingScreen({ progress }: { progress: number }) {
+  return (
+    <main className="loading-screen" aria-live="polite" aria-label="Loading AedesAlert AI dashboard">
+      <div className="loading-orbit loading-orbit-one" />
+      <div className="loading-orbit loading-orbit-two" />
+      <div className="loading-content">
+        <div className="loading-brand-mark"><Activity size={42} strokeWidth={2.1} /></div>
+        <p className="loading-kicker">PUBLIC HEALTH AI</p>
+        <h1>AedesAlert</h1>
+        <p className="loading-message">Preparing your health operations center</p>
+        <div className="loading-progress-row"><span>INITIALIZING SYSTEMS</span><strong>{progress}%</strong></div>
+        <div className="loading-progress-track" role="progressbar" aria-valuemin={1} aria-valuemax={100} aria-valuenow={progress}>
+          <div className="loading-progress-bar" style={{ width: `${progress}%` }} />
+        </div>
+      </div>
+      <p className="loading-footer">EARLY WARNING · COMMUNITY ACTION · HEALTHIER BARANGAYS</p>
+    </main>
   );
 }
 

@@ -5,6 +5,22 @@
 body { margin: 0; background: var(--cloud); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
 button, input { font: inherit; }
 button { cursor: pointer; }
+.loading-screen { min-height: 100vh; position: relative; overflow: hidden; display: grid; place-items: center; background: var(--navy); color: #fff; }
+.loading-content { width: min(360px, calc(100% - 48px)); text-align: center; position: relative; z-index: 1; animation: loading-enter .7s ease both; }
+.loading-brand-mark { width: 92px; height: 92px; margin: 0 auto 23px; display: grid; place-items: center; color: #fff; background: var(--coral); border-radius: 25px; transform: rotate(-8deg); box-shadow: 0 0 0 12px #e94d5f12, 0 18px 50px #00000035; animation: loading-pulse 2s ease-in-out infinite; }
+.loading-brand-mark svg { transform: rotate(8deg); }
+.loading-kicker { color: #9da9c0; font-size: 9px; letter-spacing: 3px; font-weight: 700; margin: 0 0 9px; }
+.loading-content h1 { font-size: 37px; letter-spacing: -1.5px; margin: 0; }
+.loading-message { color: #aab4c7; font-size: 12px; margin: 12px 0 53px; }
+.loading-progress-row { display: flex; align-items: center; justify-content: space-between; color: #8995ad; font-size: 8px; letter-spacing: 1.3px; font-weight: 700; margin-bottom: 10px; }
+.loading-progress-row strong { color: #fff; font-size: 12px; letter-spacing: 0; }
+.loading-progress-track { height: 4px; width: 100%; border-radius: 4px; overflow: hidden; background: #ffffff1c; }
+.loading-progress-bar { height: 100%; border-radius: inherit; background: var(--coral); transition: width .04s linear; box-shadow: 0 0 13px #e94d5f; }
+.loading-footer { position: absolute; bottom: 28px; color: #718099; font-size: 8px; letter-spacing: 1.8px; margin: 0; text-align: center; }
+.loading-orbit { position: absolute; border: 1px solid #ffffff12; border-radius: 50%; pointer-events: none; }
+.loading-orbit-one { width: 620px; height: 620px; }.loading-orbit-two { width: 900px; height: 900px; border-color: #20a99912; }
+@keyframes loading-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes loading-pulse { 0%, 100% { box-shadow: 0 0 0 12px #e94d5f12, 0 18px 50px #00000035; } 50% { box-shadow: 0 0 0 19px #e94d5f08, 0 18px 60px #00000045; } }
 .app-shell { display: flex; min-height: 100vh; }
 .sidebar { width: 256px; min-height: 100vh; background: var(--navy); color: #fff; display: flex; flex-direction: column; padding: 27px 16px 18px; flex-shrink: 0; }
 .brand-lockup { display: flex; align-items: center; gap: 11px; padding: 0 12px 37px; }
