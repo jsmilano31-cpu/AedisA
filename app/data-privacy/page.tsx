@@ -1,0 +1,6 @@
+import { Check, LockKeyhole, ShieldCheck, Smartphone } from "lucide-react";
+import { OperationsShell } from "@/components/operations-shell";
+
+export default function DataPrivacyPage() {
+  return <OperationsShell title="Data privacy"><div className="page-content"><section className="page-hero"><div><p className="eyebrow">SYSTEM SETTINGS</p><h1>Data privacy</h1><p className="welcome-copy">Review how AedesAlert protects sensitive public health information.</p></div><div className="privacy-status"><ShieldCheck size={17} /> Protected</div></section><section className="settings-grid"><div className="panel setting-card"><div className="setting-icon"><LockKeyhole size={19} /></div><h2>Anonymized locations</h2><p>Community reports are shown at barangay level. Household addresses are never exposed on operational maps.</p><span className="setting-enabled"><Check size={14} /> Enabled by policy</span></div><div className="panel setting-card"><div className="setting-icon"><Smartphone size={19} /></div><h2>Secure notifications</h2><p>Only assigned health officers receive field dispatch details and private report metadata.</p><span className="setting-enabled"><Check size={14} /> Enabled by policy</span></div></section></div></OperationsShell>;
+}
